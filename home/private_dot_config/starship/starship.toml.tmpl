@@ -52,7 +52,7 @@ us-east-1 = "N. Virginia"
 [git_branch]
 symbol = " "
 
-{{- if eq .chezmoi.os "darwin" }}
+{{ if eq .chezmoi.os "darwin" -}}
 [[battery.display]]
 threshold = 30
 {{- end }}
