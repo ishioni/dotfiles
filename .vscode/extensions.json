@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "signageos.signageos-vscode-sops",
+    "mikestead.dotenv",
+    "redhat.vscode-yaml",
+    "samuelcolvin.jinjahtml"
+  ]
+}
