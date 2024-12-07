@@ -1,0 +1,58 @@
+add_newline = true
+
+format = """\
+  $username\
+{{- if eq .chezmoi.os "darwin" }}
+  $battery\
+{{- end }}
+  $directory\
+  $kubernetes\
+  $aws\
+  $git_branch\
+  $git_state\
+  $git_status\
+  $character\
+  """
+
+[character]
+success_symbol = "\n[❯](bold green)"
+error_symbol = "\n[✖](bold red)"
+
+[cmd_duration]
+min_time = 500
+
+[directory]
+truncation_length = 5
+truncate_to_repo = true
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[username]
+show_always = false
+
+[kubernetes]
+disabled = false
+symbol = '⛵ '
+format = '[$symbol$context( \($namespace\))]($style)'
+
+[aws]
+format = "on [$symbol$profile( $region)]($style) "
+style = "bold Yellow"
+symbol = "☁️ "
+
+[aws.region_aliases]
+eu-central-1 = "Frankfurt"
+eu-north-1 = "Stockholm"
+eu-west-3 = "Paris"
+sa-east-1 = "São Paulo"
+us-east-1 = "N. Virginia"
+
+[git_branch]
+symbol = " "
+
+{{- if eq .chezmoi.os "darwin" }}
+[[battery.display]]
+threshold = 30
+{{- end }}
