@@ -1,0 +1,8 @@
+# Mac OS X hidden files
+.DS_Store
+
+# Sops
+.decrypted~*
+
+# Python virtualenvs
+.venv

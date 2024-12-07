@@ -1,0 +1,6 @@
+brew "age"
+brew "sops"
+brew "coreutils"
+brew "zsh"
+brew "zsh-autosuggestions"
+brew "zsh-fast-syntax-highlighting"

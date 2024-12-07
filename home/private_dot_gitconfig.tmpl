@@ -1,0 +1,33 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Piotr Maksymiuk
+	email = piotr.maksymiuk@movishell.pl
+	username = ishioni
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICabh/2jf2rA8nRyfK3bReY+0CTZTJnq+72Tr7P0yRHt
+[gpg]
+  format = ssh
+{{ if eq .chezmoi.os "darwin" -}}
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{- end }}
+[core]
+  editor = vim
+  excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+[commit]
+  gpgsign = true
+[format]
+	signoff = true
+[merge]
+	ff = only
+[pull]
+	rebase = true
+[tag]
+	forceSignAnnotated = true
+[init]
+	defaultBranch = master
+[url "ssh://git@github.com/"]
+  pushInsteadOf = https://github.com/
+[push]
+  autoSetupRemote = true
+[fetch]
+  prune = true

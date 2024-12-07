@@ -1,0 +1,26 @@
+Include *.conf
+
+{{- if eq .chezmoi.os "darwin" }}
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- end }}
+
+Host gateway
+  HostName %h.ishioni.casa
+  user root
+
+Host coreelec
+  user root
+
+Host thesucc
+  HostName %h.ishioni.casa
+  user root
+
+Host proxmox-?
+  HostName %h.ishioni.casa
+  user root
+
+Host 10.*.*.* 172.16.*.* 192.168.*.*
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
