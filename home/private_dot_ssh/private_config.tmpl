@@ -1,4 +1,9 @@
+# Added by OrbStack: 'orb' SSH host for Linux machines
+# This only works if it's at the top of ssh_config (before any Host blocks).
+# This won't be added again if you remove it.
+Include ~/.orbstack/ssh/config
 Include *.conf
+Include extra.d/*.conf
 
 {{- if eq .chezmoi.os "darwin" }}
 Host *
@@ -23,5 +28,3 @@ Host proxmox
 Host 10.*.*.* 172.16.*.* 192.168.*.*
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
-
-Include extra.d/* 
