@@ -1,4 +1,5 @@
 brew "age"
+brew "atuin"
 brew "sops"
 brew "coreutils"
 brew "zsh"
