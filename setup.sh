@@ -93,18 +93,29 @@ function install_1password() {
       brew install --cask 1password
       brew install --cask 1password-cli
     fi
-  # elif [[ "${ostype}" == "Linux" ]]; then
-  #   if [[ -e "/usr/local/bin/op" ]]; then
-  #     echo "1Password is already installed."
-  #   else
-  #     wget "https://cache.agilebits.com/dist/1P/op2/pkg/v2.30.3/op_linux_amd64_v2.30.3.zip" -O op.zip && \
-  #     unzip -d op op.zip && \
-  #     sudo mv op/op /usr/local/bin/ && \
-  #     rm -r op.zip op && \
-  #     sudo groupadd -f onepassword-cli && \
-  #     sudo chgrp onepassword-cli /usr/local/bin/op && \
-  #     sudo chmod g+s /usr/local/bin/op
-  #   fi
+  elif [[ "${ostype}" == "Linux" ]]; then
+    if [[ "$(uname -r)" == *"+truenas"* ]]; then
+      if [[ -e "$(get_homebrew_install_dir)/bin/op" ]]; then
+        echo "1Password is already installed."
+      else
+        wget "https://cache.agilebits.com/dist/1P/op2/pkg/v2.32.0/op_linux_amd64_v2.32.0.zip" -O op.zip && \
+        unzip -d op op.zip && \
+        sudo mv op/op $(get_homebrew_install_dir)/bin/op && \
+        sudo chmod g+s $(get_homebrew_install_dir)/bin/op
+      fi
+    else
+      if [[ -e "/usr/local/bin/op" ]]; then
+        echo "1Password is already installed."
+      else
+        wget "https://cache.agilebits.com/dist/1P/op2/pkg/v2.32.0/op_linux_amd64_v2.32.0.zip" -O op.zip && \
+        unzip -d op op.zip && \
+        sudo mv op/op /usr/local/bin/ && \
+        rm -r op.zip op && \
+        sudo groupadd -f onepassword-cli && \
+        sudo chgrp onepassword-cli /usr/local/bin/op && \
+        sudo chmod g+s /usr/local/bin/op
+      fi
+    fi
   fi
   read -p "Please open 1Password, log into all accounts and set under Settings>CLI activate Integrate with 1Password CLI. Press any key to continue." -n 1 -r
 }

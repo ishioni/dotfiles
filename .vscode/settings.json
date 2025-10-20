@@ -1,11 +1,13 @@
 {
-  "files.associations": {
-    "*.fish.tmpl": "jinja-shell",
-    "*.json.tmpl": "jinja-json",
-    "*.sh.tmpl": "jinja-shell",
-    "*.toml.tmpl": "jinja-toml",
-    "*.yaml.tmpl": "jinja-yaml",
-    "*.yml.tmpl": "jinja-yaml",
-    "*.tmpl": "jinja"
+  "files": {
+    "associations": {
+      "**/*.toml.tmpl": "toml",
+      "**/*.yaml.tmpl": "yaml",
+      "**/*.sh.tmpl": "shellscript",
+      "**/*.zsh.tmpl": "shellscript",
+      "**/home/dot_config/git/config.tmpl": "toml",
+      "**/.chezmoiignore": "plaintext",
+      "**/krewfile": "plaintext"
+    },
   }
 }
