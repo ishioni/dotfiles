@@ -1,0 +1,26 @@
+".oh-my-zsh":
+  type: archive
+  {{ $omzRevision := includeTemplate "get-github-head-revision" "ohmyzsh/ohmyzsh" }}
+  url: "https://github.com/ohmyzsh/ohmyzsh/archive/{{ $omzRevision }}.tar.gz"
+  stripComponents: 1
+
+".oh-my-zsh/custom/plugins/zsh-syntax-highlighting":
+  type: archive
+  {{ $zshSyntaxHighlightingRevision := includeTemplate "get-github-head-revision" "zsh-users/zsh-syntax-highlighting" }}
+  url: "https://github.com/zsh-users/zsh-syntax-highlighting/archive/{{ $zshSyntaxHighlightingRevision }}.tar.gz"
+  stripComponents: 1
+  exact: true
+
+".oh-my-zsh/custom/plugins/zsh-autosuggestions":
+  type: archive
+  {{ $zshAutoSuggestionsRevision := includeTemplate "get-github-head-revision" "zsh-users/zsh-autosuggestions" }}
+  url: "https://github.com/zsh-users/zsh-autosuggestions/archive/{{ $zshAutoSuggestionsRevision }}.tar.gz"
+  stripComponents: 1
+  exact: true
+
+".oh-my-zsh/custom/plugins/zsh-completions":
+  type: archive
+  {{ $zshCompletionsRevision := includeTemplate "get-github-head-revision" "zsh-users/zsh-completions" }}
+  url: "https://github.com/zsh-users/zsh-completions/archive/{{ $zshCompletionsRevision }}.tar.gz"
+  stripComponents: 1
+  exact: true
