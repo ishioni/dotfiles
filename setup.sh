@@ -47,11 +47,11 @@ function initialize_linux() {
 }
 
 function initialize_truenas() {
-  if [[ ! -s /home/linuxbrew ]] && [[ ! -d /mnt/SSD/Userhomes/linuxbrew ]]; then
+  if [[ ! -s /home/linuxbrew ]] && [[ ! -d /mnt/TEST/Userhomes/linuxbrew ]]; then
     echo "Initializing Truenas..."
     sudo install-dev-tools
-    sudo mkdir -p /mnt/SSD/Userhomes/linuxbrew
-    ln -s /home/linuxbrew /mnt/SSD/Userhomes/linuxbrew
+    sudo mkdir -p /mnt/TEST/Userhomes/linuxbrew
+    ln -s /home/linuxbrew /mnt/TEST/Userhomes/linuxbrew
   else
     echo "Truenas ready for homebrew"
   fi
