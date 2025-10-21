@@ -51,7 +51,6 @@ function initialize_truenas() {
     echo "Initializing Truenas..."
     sudo install-dev-tools
     mkdir -p ${HOME}/linuxbrew
-    sudo chown 
     sudo ln -s ${HOME}/linuxbrew /home/linuxbrew
   else
     echo "Truenas ready for homebrew"
