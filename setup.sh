@@ -117,7 +117,12 @@ function install_1password() {
       fi
     fi
   fi
-  read -p "Please open 1Password, log into all accounts and set under Settings>CLI activate Integrate with 1Password CLI. Press any key to continue." -n 1 -r
+  if [[ "${ostype}" == "Linux" ]]; then
+    op account add --address my.1password.com
+    eval "$(op signin)"
+  else
+    read -p "Please open 1Password, log into all accounts and set under Settings>CLI activate Integrate with 1Password CLI. Press any key to continue." -n 1 -r
+  fi
 }
 
 function get_homebrew_shellenv() {
