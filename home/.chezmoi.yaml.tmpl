@@ -18,10 +18,10 @@ data:
     local: {{ .chezmoi.homeDir }}/.local
   user:
     name: Piotr Maksymiuk
-    {{- if $homeMachine }}
     email: {{ onepasswordRead "op://Private/Piotr Maksymiuk/email" }}
     signingKey: {{ onepasswordRead "op://Private/SSH Ed2559/public key" }}
-    {{- else }}
-    email: {{ onepasswordRead "op://Employer/Piotr Maksymiuk/email" }}
-    signingKey: {{ onepasswordRead "op://Employer/SSH Ed2559/public key" }}
-    {{- end }}
+      {{- if not $homeMachine }}
+      work:
+        email: {{ onepasswordRead "op://Employer/Piotr Maksymiuk/email" }}
+        signingKey: {{ onepasswordRead "op://Employer/SSH Ed2559/public key" }}
+      {{- end }}
