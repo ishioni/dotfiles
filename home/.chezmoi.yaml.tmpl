@@ -19,9 +19,9 @@ data:
   user:
     name: Piotr Maksymiuk
     email: {{ onepasswordRead "op://Private/Piotr Maksymiuk/email" }}
-    signingKey: {{ onepasswordRead "op://Private/SSH Ed2559/public key" }}
+    signingKey: {{ onepasswordRead "op://Private/SSH Ed25519/public key" }}
       {{- if not $homeMachine }}
       work:
         email: {{ onepasswordRead "op://Employer/Piotr Maksymiuk/email" }}
-        signingKey: {{ onepasswordRead "op://Employer/SSH Ed2559/public key" }}
+        signingKey: {{ onepasswordRead "op://Employer/SSH Ed25519/public key" }}
       {{- end }}
