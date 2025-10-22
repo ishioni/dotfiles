@@ -3,7 +3,9 @@
 # Install krewfile and packages
 # krewfile_plugins hash: {{ include "dot_config/krewfile/krewfile" | sha256sum }}
 # ---------------------------------------------------------------------------------------------------------------------
-
+echo ">>> Installing krewfile packages"
+printenv
+echo ">>>"
 if test -n "$(command -v kubectl)"; then
   if test -n "$(command -v go)"; then
     go install github.com/brumhard/krewfile@latest
