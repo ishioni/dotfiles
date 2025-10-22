@@ -31,7 +31,6 @@ source $ZSH/oh-my-zsh.sh
 # Initializations
 path+=($KREW_ROOT/bin)
 eval "$(atuin init zsh)"
-eval "$(kubectl cnpg completion zsh)"
 eval $({{ if (eq .chezmoi.os "darwin") }}gdircolors{{else}}dircolors{{end}} ~/.config/dircolors/dir_colors)
 
 # Cache completions aggressively
