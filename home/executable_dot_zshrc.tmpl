@@ -4,6 +4,9 @@ DISABLE_AUTO_UPDATE="true"
 ZSH_DISABLE_COMPFIX=true
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# Cache completions aggressively
+autoload -Uz compinit
 if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
   compinit
 else
