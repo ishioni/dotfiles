@@ -3,6 +3,8 @@
 # Install krewfile and packages
 # krewfile_plugins hash: {{ include "dot_config/krewfile/krewfile" | sha256sum }}
 # ---------------------------------------------------------------------------------------------------------------------
+export GOPATH="{{ .chezmoi.homeDir }}/.go"
+export GOBIN="$GOPATH/bin"
 echo ">>> Installing krewfile packages"
 printenv
 echo ">>>"
