@@ -4,6 +4,11 @@
   url: "https://github.com/ohmyzsh/ohmyzsh/archive/{{ $omzRevision }}.tar.gz"
   stripComponents: 1
 
+".oh-my-zsh-test":
+  type: git-repo
+  url: https://github.com/ohmyzsh/ohmyzsh.git
+  stripComponents: 1
+
 ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting":
   type: archive
   {{ $zshSyntaxHighlightingRevision := includeTemplate "get-github-head-revision" "zsh-users/zsh-syntax-highlighting" }}
