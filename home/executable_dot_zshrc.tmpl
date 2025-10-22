@@ -5,14 +5,6 @@ ZSH_DISABLE_COMPFIX=true
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
-# Cache completions aggressively
-autoload -Uz compinit
-if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
-  compinit
-else
-  compinit -C
-fi
-
 # Environment Variables
 export GOPATH="{{ .chezmoi.homeDir }}/.go"
 export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
@@ -38,3 +30,11 @@ source $ZSH/oh-my-zsh.sh
 # Initializations
 eval "$(atuin init zsh)"
 eval $({{ if (eq .chezmoi.os "darwin") }}gdircolors{{else}}dircolors{{end}} ~/.config/dircolors/dir_colors)
+
+# Cache completions aggressively
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+  compinit
+else
+  compinit -C
+fi
