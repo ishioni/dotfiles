@@ -20,7 +20,8 @@ eval "$(atuin init zsh)"
 #   $HOME/.bin
 #   $HOME/.krew/bin
 #   )
-# export GOPATH="${HOME}/.go"
+export GOPATH="{{ .chezmoi.homeDir }}/.go"
+export GOBIN="$GOPATH/bin"
 # export GOROOT="$(brew --prefix golang)/libexec"
 # export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
