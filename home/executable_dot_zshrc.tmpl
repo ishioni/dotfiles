@@ -1,8 +1,6 @@
 # Paths
 {{- if lookPath "/opt/homebrew/bin/brew" }}
 eval "$(/opt/homebrew/bin/brew shellenv)"
-source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 {{- end }}
 {{- if lookPath "/home/linuxbrew/.linuxbrew/bin/brew" }}
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -32,6 +30,9 @@ plugins=(
   docker
   git
   kubectl
+  zsh-autosuggestions
+  zsh-completions
+  zsh-fast-syntax-highlighting
   )
 
 source $ZSH/oh-my-zsh.sh
