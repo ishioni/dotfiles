@@ -1,5 +1,6 @@
 # OMZ Configuration
 BREW_LOCATION="{{ if (eq .chezmoi.os "darwin") }}/opt/homebrew/bin/brew{{else}}/home/linuxbrew/.linuxbrew/bin/brew{{end}}"
+KREW_ROOT="{{ .chezmoi.homeDir }}/.krew"
 DISABLE_AUTO_UPDATE="true"
 ZSH_DISABLE_COMPFIX=true
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
@@ -30,6 +31,7 @@ source $ZSH/oh-my-zsh.sh
 # Initializations
 eval "$(atuin init zsh)"
 eval $({{ if (eq .chezmoi.os "darwin") }}gdircolors{{else}}dircolors{{end}} ~/.config/dircolors/dir_colors)
+path+=($KREW_ROOT/bin)
 
 # Cache completions aggressively
 autoload -Uz compinit
