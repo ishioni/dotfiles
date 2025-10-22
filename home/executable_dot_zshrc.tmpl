@@ -18,7 +18,7 @@ export ZSH="${HOME}/.oh-my-zsh"
 
 # Initializations
 eval "$(atuin init zsh)"
-eval $({{ if (eq .chezmoi.os "darwin") }}gdircolors{{else}}dircolors{{end}} ~/.config/dircolors/dircolors)
+eval $({{ if (eq .chezmoi.os "darwin") }}gdircolors{{else}}dircolors{{end}} ~/.config/dircolors/dir_colors)
 
 # Plugins
 plugins=(
