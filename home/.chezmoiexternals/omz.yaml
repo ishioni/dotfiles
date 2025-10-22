@@ -1,6 +1,8 @@
 ".oh-my-zsh":
-  type: git-repo
-  url: https://github.com/ohmyzsh/ohmyzsh.git
+  type: archive
+  {{ $omzRevision := includeTemplate "get-github-head-revision" "ohmyzsh/ohmyzsh" }}
+  url: "https://github.com/ohmyzsh/ohmyzsh/archive/{{ $omzRevision }}.tar.gz"
+  stripComponents: 1
 
 ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting":
   type: archive
