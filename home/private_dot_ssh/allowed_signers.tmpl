@@ -1,0 +1,4 @@
+{{ .user.email }} {{ .user.signingKey }}
+{{- if .workMachine }}
+{{ .user.work.email }} {{ .user.work.signingKey }}
+{{- end }}
