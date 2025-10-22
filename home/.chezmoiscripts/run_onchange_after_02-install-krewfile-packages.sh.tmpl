@@ -1,10 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # ---------------------------------------------------------------------------------------------------------------------
 # Install krewfile and packages
 # krewfile_plugins hash: {{ include "dot_config/krewfile/krewfile" | sha256sum }}
 # ---------------------------------------------------------------------------------------------------------------------
-export GOPATH="{{ .chezmoi.homeDir }}/.go"
-export GOBIN="$GOPATH/bin"
+source ~/.zshrc
 echo ">>> Installing krewfile packages"
 printenv
 echo ">>>"
