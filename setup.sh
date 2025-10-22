@@ -141,3 +141,4 @@ chezmoi init "${DOTFILES_REPO_URL}" --branch feat/rework
 cd ~/.local/share/chezmoi
 git remote set-url origin git@github.com:ishioni/dotfiles.git
 chezmoi apply
+source ~/.zshrc
