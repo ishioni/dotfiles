@@ -1,0 +1,17 @@
+{{ if not .homeMachine }}
+#!/usr/bin/env bash
+
+KEY_ID="5B823681C7C2F608"
+
+if gpg --list-secret-keys --keyid-format long | grep -q "${KEY_ID}"; then
+  echo "GPG key is present already"
+else
+  tmpDir=$(mktemp -d)
+  for uuid in gw4c4ealnewbzz4h5eod5hssem; do
+    tmpFile="${tmpDir}/${uuid}.asc"
+
+    op document get ${uuid} --out-file ${tmpFile}
+    gpg --import ${tmpFile}
+  done
+fi
+{{ end }}
