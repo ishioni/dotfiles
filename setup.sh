@@ -87,7 +87,7 @@ function initialize_truenas() {
       sudo ln -sfn "/mnt/${dataset}" /home/linuxbrew
     fi
     # Create tmpdir
-    mkdir -p "/mnt/${vdataset}/tmp"
+    mkdir -p "/mnt/${dataset}/tmp"
   else
     echo "Truenas ready for homebrew"
   fi
