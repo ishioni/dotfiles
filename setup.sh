@@ -79,7 +79,7 @@ function initialize_truenas() {
       fi
       # Ensure ownership on the dataset
       sudo chown -R "${USER}:${USER}" "/mnt/${dataset}"
-      sudo chmod 775 /home/linuxbrew
+      sudo chmod 775 "/mnt/${dataset}"
     fi
 
     # Ensure user's home has a symlink pointing to the ZFS-managed /home/linuxbrew
