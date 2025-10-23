@@ -13,5 +13,6 @@ curl https://raw.githubusercontent.com/ishioni/dotfiles/master/setup.sh > /tmp/i
 Or in Truenas
 
 ```shell
-curl https://raw.githubusercontent.com/ishioni/dotfiles/refs/heads/feat/rework/setup.sh > ./install && chmod +x ./install && ./install
+export ZFS_POOL=TEST && \
+curl https://raw.githubusercontent.com/ishioni/dotfiles/master/setup.sh  > ./install && chmod +x ./install && ./install
 ```
