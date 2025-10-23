@@ -48,7 +48,7 @@ function initialize_linux() {
 }
 
 function initialize_truenas() {
-  if [[ ! -s /home/linuxbrew ]] && [[ ! -d /mnt/TEST/Userhomes/linuxbrew ]]; then
+  if [[ ! -s /home/linuxbrew ]] ; then
     echo "Initializing Truenas..."
     sudo install-dev-tools
 
@@ -83,7 +83,7 @@ function initialize_truenas() {
     fi
 
     # Ensure user's home has a symlink pointing to the ZFS-managed /home/linuxbrew
-    if ! [[ -s "/home/linuxbrew" ]]; then
+    if [[ ! -s /home/linuxbrew ]] ; then
       sudo ln -sfn "/mnt/${dataset}" /home/linuxbrew
     fi
     # Create tmpdir
