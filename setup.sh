@@ -3,7 +3,7 @@
 set -Eeuo pipefail
 
 declare -r DOTFILES_REPO_URL="https://github.com/ishioni/dotfiles"
-declare -r ostype="$(uname)"
+declare ostype="$(uname)"
 
 function initialize_os_env() {
   if [[ "${ostype}" == "Darwin" ]]; then
