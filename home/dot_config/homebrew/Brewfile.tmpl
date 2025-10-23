@@ -40,7 +40,7 @@ brew "opentofu"
 brew "fluxcd/tap/flux"
 
 {{ if (eq .chezmoi.os "darwin") }}
-brew "mas"
+# brew "mas"
 cask "1password"
 cask "1password-cli"
 cask "appcleaner"
@@ -72,12 +72,12 @@ cask "session-manager-plugin"
 cask "slack"
 {{- end }}
 
-mas "Brother iPrint&Scan", id: 1193539993
-mas "Discovery", id: 1381004916
-mas "Faktura", id: 650567365
-mas "Velja", id: 1607635845
-mas "WiFi Explorer", id: 494803304
-mas "Windows App", id: 1295203466
-mas "WireGuard", id: 1451685025
+#  mas "Brother iPrint&Scan", id: 1193539993
+#  mas "Discovery", id: 1381004916
+#  mas "Faktura", id: 650567365
+#  mas "Velja", id: 1607635845
+#  mas "WiFi Explorer", id: 494803304
+#  mas "Windows App", id: 1295203466
+#  mas "WireGuard", id: 1451685025
 
 {{ end }}
