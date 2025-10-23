@@ -1,0 +1,78 @@
+[include]
+  path = alias
+
+[color]
+  ui = auto
+
+[core]
+  autocrlf = input
+  editor = vim
+  pager = "delta | less -R"
+  excludesfile = {{ .paths.config }}/git/ignore
+
+[delta]
+  features = decorations
+  light = false
+  navigate = true
+  side-by-side = true
+
+[diff]
+  colorMoved = default
+
+[diff "sopsdiffer"]
+  textconv = sops decrypt
+
+[fetch]
+  prune = true
+
+[format]
+  signoff = true
+
+[init]
+  defaultBranch = master
+
+[interactive]
+  diffFilter = delta --color-only
+
+[merge]
+  conflictstyle = diff3
+
+[pager]
+  branch = false
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+
+[rebase]
+  autoStash = true
+
+[status]
+  submoduleSummary = false
+
+[commit]
+  forceSignAnnotated = true
+  gpgSign = true
+
+[tag]
+  gpgSign = true
+  forceSignAnnotated = true
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
+  {{- if (eq .chezmoi.os "darwin") }}
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+  {{- end }}
+
+[url "ssh://git@github.com/"]
+  pushInsteadOf = https://github.com/
+
+[user]
+  email = {{ .user.email }}
+  name = {{ .user.name }}
+  signingkey = {{ .user.signingKey }}

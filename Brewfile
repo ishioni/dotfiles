@@ -1,7 +1,0 @@
-brew "age"
-brew "atuin"
-brew "sops"
-brew "coreutils"
-brew "zsh"
-brew "zsh-autosuggestions"
-brew "zsh-fast-syntax-highlighting"

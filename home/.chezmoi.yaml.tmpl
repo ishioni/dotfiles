@@ -1,0 +1,29 @@
+---
+{{- $homeMachine := promptBoolOnce . "homeMachine" "Is this your home machine?" -}}
+
+diff:
+  exclude: ["scripts"]
+  command: "delta"
+  pager: "delta"
+
+status:
+  exclude: ["scripts"]
+
+scriptTempDir: "~/.tmp"
+
+data:
+  homeMachine: {{ $homeMachine }}
+  workMachine: {{ not $homeMachine }}
+  paths:
+    cache: {{ .chezmoi.homeDir }}/.cache
+    config: {{ .chezmoi.homeDir }}/.config
+    local: {{ .chezmoi.homeDir }}/.local
+  user:
+    name: Piotr Maksymiuk
+    email: {{ onepasswordRead "op://Private/Piotr Maksymiuk/email" }}
+    signingKey: {{ onepasswordRead "op://Private/SSH Ed25519/public key" }}
+    {{- if not $homeMachine }}
+    work:
+      email: {{ onepasswordRead "op://Employer/Piotr Maksymiuk/email" }}
+      signingKey: {{ onepasswordRead "op://Employer/SSH Ed25519/public key" }}
+    {{- end }}
