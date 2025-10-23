@@ -63,7 +63,7 @@ function initialize_truenas() {
     fi
 
     # Test if the provided zpool exists
-    if ! sudo zfs list ${zpool_name} >/dev/null 2>&1; then
+    if ! sudo zfs list "${zpool_name}" >/dev/null 2>&1; then
       echo "ZFS pool ${zpool_name} does not exist, exiting..."
       exit 1
     fi
@@ -147,8 +147,8 @@ function install_1password() {
     else
       wget "https://cache.agilebits.com/dist/1P/op2/pkg/v2.32.0/op_linux_amd64_v2.32.0.zip" -O op.zip && \
       unzip -d op op.zip && \
-      sudo mv op/op $(get_homebrew_install_dir)/bin/op && \
-      sudo chmod g+s $(get_homebrew_install_dir)/bin/op
+      sudo mv op/op "$(get_homebrew_install_dir)/bin/op" && \
+      sudo chmod g+s "$(get_homebrew_install_dir)/bin/op"
     fi
   fi
   if [[ "${ostype}" == "TrueNAS" ]]; then
@@ -160,7 +160,7 @@ function install_1password() {
 }
 
 function get_homebrew_shellenv() {
-  $(get_homebrew_install_dir)/bin/brew shellenv
+  "$(get_homebrew_install_dir)/bin/brew" shellenv
 }
 
 initialize_os_env
@@ -175,4 +175,4 @@ chezmoi init "${DOTFILES_REPO_URL}" --branch feat/rework
 cd ~/.local/share/chezmoi
 git remote set-url origin git@github.com:ishioni/dotfiles.git
 chezmoi apply
-source ~/.zshrc
+source "${HOME}"/.zshrc
