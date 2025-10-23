@@ -51,8 +51,43 @@ function initialize_truenas() {
   if [[ ! -s /home/linuxbrew ]] && [[ ! -d /mnt/TEST/Userhomes/linuxbrew ]]; then
     echo "Initializing Truenas..."
     sudo install-dev-tools
-    mkdir -p ${HOME}/linuxbrew
-    sudo ln -s ${HOME}/linuxbrew /home/linuxbrew
+
+    # Determine zpool to use: prefer env var ZFS_POOL, then TRUENAS_ZPOOL, else prompt
+    local zpool_name=""
+    if [[ -n "${ZFS_POOL-}" ]]; then
+      zpool_name="${ZFS_POOL}"
+    elif [[ -n "${TRUENAS_ZPOOL-}" ]]; then
+      zpool_name="${TRUENAS_ZPOOL}"
+    else
+      read -r -p "Enter the ZFS pool to create the linuxbrew dataset on (or leave empty to skip ZFS dataset creation): " zpool_name
+    fi
+
+    # Test if the provided zpool exists
+    if ! sudo zfs list ${zpool_name} >/dev/null 2>&1; then
+      echo "ZFS pool ${zpool_name} does not exist, exiting..."
+      exit 1
+    fi
+    # If zpool provided, create dataset with mountpoint at /home/linuxbrew
+    if [[ -n "${zpool_name}" ]]; then
+      dataset="${zpool_name}/linuxbrew"
+      echo "Creating ZFS dataset ${dataset}"
+      # Create dataset if it doesn't exist
+      if ! sudo zfs list "${dataset}" >/dev/null 2>&1; then
+        sudo zfs create "${dataset}"
+      else
+        echo "ZFS dataset ${dataset} already exists."
+      fi
+      # Ensure ownership on the dataset
+      sudo chown -R "${USER}:${USER}" "/mnt/${dataset}"
+      sudo chmod 775 /home/linuxbrew
+    fi
+
+    # Ensure user's home has a symlink pointing to the ZFS-managed /home/linuxbrew
+    if ! [[ -s "/home/linuxbrew" ]]; then
+      sudo ln -sfn "/mnt/${dataset}" /home/linuxbrew
+    fi
+    # Create tmpdir
+    mkdir -p "/mnt/{$dataset}/tmp"
   else
     echo "Truenas ready for homebrew"
   fi
