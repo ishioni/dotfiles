@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ -L "{{ .chezmoi.homeDir }}/Library/Application Support/Code/User/settings.json" ]]; then
+  echo "settings.json already linked"
+else
+  if [[ -e "{{ .chezmoi.homeDir }}/Library/Application Support/Code/User/settings.json" ]]; then
+    rm "{{ .chezmoi.homeDir }}/Library/Application Support/Code/User/settings.json"
+  fi
+  ln -s "{{ .paths.config }}/vscode/settings.json" "{{ .chezmoi.homeDir }}/Library/Application Support/Code/User/settings.json"
+fi
