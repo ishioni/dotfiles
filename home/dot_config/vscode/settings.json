@@ -1,0 +1,95 @@
+{
+    "[go]": {
+        "editor.defaultFormatter": "golang.go",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": false,
+        "editor.tabSize": 2
+    },
+    "[json5]": {
+        "editor.defaultFormatter": "mrmlnc.vscode-json5",
+        "editor.formatOnSave": false,
+        "editor.tabSize": 2
+    },
+    "[opentofu]": {
+        "editor.defaultFormatter": "opentofu.vscode-opentofu",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
+    },
+    "[sh]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.tabSize": 2
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.tabSize": 2
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "customizeUI.activityBar": "bottom",
+    "customizeUI.titleBar": "inline",
+    "docker.extension.enableComposeLanguageServer": true,
+    "docker.lsp.experimental.scout.criticalHighVulnerabilities": false,
+    "docker.lsp.experimental.scout.notPinnedDigest": false,
+    "docker.lsp.experimental.scout.recommendedTag": false,
+    "docker.lsp.experimental.scout.vulnerabilities": false,
+    "editor.fontFamily": "FiraCodeNerdFontCompleteM-Retina",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 13,
+    "editor.formatOnPaste": true,
+    "editor.minimap.enabled": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.suggest.preview": true,
+    "files.associations": {
+        "*.json5": "json5",
+        "*.tf": "opentofu",
+        "*.tofu": "opentofu",
+        "*.toml": "toml",
+        "*.yaml": "yaml",
+        "*.yml": "yaml",
+        "**/ansible/**/*.yaml": "ansible"
+    },
+    "git.confirmSync": false,
+    "git.fetchOnPull": true,
+    "git.ignoreRebaseWarning": true,
+    "git.replaceTagsWhenPull": true,
+    "opentofu.experimentalFeatures.prefillRequiredFields": true,
+    "opentofu.experimentalFeatures.validateOnSave": true,
+    "opentofu.languageServer.enable": true,
+    "projects.checkPaths": true,
+    "projects.configPath": "/Users/movi/.config/vscode/vscode_projects.json",
+    "projects.refreshDepth": 4,
+    "projects.refreshRoots": [
+        "~/Dev/"
+    ],
+    "redhat.telemetry.enabled": false,
+    "search.showLineNumbers": true,
+    "sops.binPath": "/opt/homebrew/bin/sops",
+    "sops.configPath": "./.sops.yaml",
+    "sops.defaults.ageKeyFile": "/Users/movi/.config/sops/age/keys.txt",
+    "telemetry.telemetryLevel": "off",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "terminal.integrated.fontSize": 14,
+    "workbench.colorTheme": "Nord",
+    "workbench.iconTheme": "file-icons",
+    "workbench.startupEditor": "none",
+    "yaml.schemas": {
+        // this tells Red Hat's YAML extension to consider Compose YAML
+        // files as not having a schema so it will stop suggesting code
+        // completion items, hover tooltips, and so on
+        "https://raw.githubusercontent.com/docker/vscode-extension/6a88caada42b57090df7ce91ec2a6561b422afe1/misc/empty.json": [
+            "compose*y*ml",
+            "docker-compose*y*ml"
+        ]
+    }
+}
