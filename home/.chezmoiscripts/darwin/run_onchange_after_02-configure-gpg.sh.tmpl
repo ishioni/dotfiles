@@ -1,4 +1,4 @@
-{{ if not .homeMachine }}
+{{- if .workMachine }}
 #!/usr/bin/env bash
 
 KEY_ID="5B823681C7C2F608"
@@ -14,4 +14,4 @@ else
     gpg --import ${tmpFile}
   done
 fi
-{{ end }}
+{{- if .workMachine }}
