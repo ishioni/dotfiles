@@ -56,7 +56,8 @@ __add_folder_to_dock() {
 # Applications
 __clear_dock
 
-
+__add_app_to_dock /Applications/Safari.app
+{{- if .workMachine }}
 __add_app_to_dock /Applications/Brave\ Browser.app
 __add_app_to_dock /Applications/Orion.app
 __add_app_to_dock /System/Applications/Mail.app
@@ -80,7 +81,7 @@ defaults write com.apple.dock enterMissionControlByTopWindowDrag -bool false
 defaults write com.apple.dock expose-group-apps -bool false
 defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.dock show-recents -bool false
-defaults write com.apple.dock showAppExposeGestureEnabled -bool false
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 
 killall Dock
 
@@ -160,7 +161,6 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool false
 defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
 defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 2
-defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 3
 
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
