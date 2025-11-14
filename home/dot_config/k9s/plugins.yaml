@@ -170,3 +170,57 @@ plugins:
         kustomizations.kustomize.toolkit.fluxcd.io -o json
         | jq -r '.items[] | select(.spec.suspend==true) | [.metadata.name,.spec.suspend] | @tsv'
         | less -K
+  cnpg-backup:
+    shortCut: b
+    description: Backup
+    scopes:
+      - cluster
+    command: bash
+    confirm: true
+    background: false
+    args:
+      - -c
+      - 'kubectl cnpg backup $NAME -n $NAMESPACE --context "$CONTEXT" 2>&1 | less -R'
+  cnpg-hibernate-status:
+    shortCut: h
+    description: Hibernate status
+    scopes:
+      - cluster
+    command: bash
+    background: false
+    args:
+      - -c
+      - 'kubectl cnpg hibernate status $NAME -n $NAMESPACE --context "$CONTEXT" 2>&1 | less -R'
+  cnpg-hibernate:
+    shortCut: Shift-H
+    description: Hibernate
+    confirm: true
+    scopes:
+      - cluster
+    command: bash
+    background: false
+    args:
+      - -c
+      - 'kubectl cnpg hibernate on $NAME -n $NAMESPACE --context "$CONTEXT" 2>&1 | less -R'
+  cnpg-hibernate-off:
+    shortCut: Shift-H
+    description: Wake up hibernated cluster in this namespace
+    confirm: true
+    scopes:
+      - namespace
+    command: bash
+    background: false
+    args:
+      - -c
+      - 'kubectl cnpg hibernate off $NAME -n $NAME --context "$CONTEXT" 2>&1 | less -R'
+  cnpg-restart:
+    shortCut: Shift-R
+    description: Restart
+    confirm: true
+    scopes:
+      - cluster
+    command: bash
+    background: false
+    args:
+      - -c
+      - 'kubectl cnpg restart $NAME -n $NAMESPACE --context "$CONTEXT" 2>&1 | less -R'
