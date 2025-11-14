@@ -60,12 +60,12 @@ cask "telegram"
 cask "textmate"
 cask "visual-studio-code"
 cask "font-fira-code-nerd-font"
+cask "zed"
 
 {{- if .workMachine }}
 tap "aws/tap"
-
 brew "awscli"
-
+brew "aws/tap/eks-node-viewer"
 brew "git-crypt"
 brew "gpg"
 brew "terraform-docs"
