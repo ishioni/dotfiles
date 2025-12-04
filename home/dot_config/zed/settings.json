@@ -7,8 +7,14 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "colorize_brackets": true,
+  "indent_guides": {
+    "coloring": "fixed",
+    "background_coloring": "indent_aware"
+  },
   "agent_servers": {
     "cursor-agent": {
+      "type": "custom",
       "command": "cursor-agent-acp",
       "args": [],
       "env": {}
@@ -20,7 +26,7 @@
     "singleQuote": false,
     "bracketSpacing": false
   },
-  "disable_ai": true,
+  "disable_ai": false,
   "git_panel": {
     "fallback_branch_name": "master"
   },
