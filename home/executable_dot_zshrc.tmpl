@@ -1,6 +1,5 @@
 # OMZ Configuration
 BREW_LOCATION="{{ if (eq .chezmoi.os "darwin") }}/opt/homebrew/bin/brew{{else}}/home/linuxbrew/.linuxbrew/bin/brew{{end}}"
-HOMEBREW_CASK_OPTS=--no-quarantine
 KREW_ROOT="{{ .chezmoi.homeDir }}/.krew"
 DISABLE_AUTO_UPDATE="true"
 ZSH_DISABLE_COMPFIX=true
@@ -12,6 +11,7 @@ export GOPATH="{{ .chezmoi.homeDir }}/.go"
 {{- if .workMachine }}
 export KUBECONFIG=~/.kube/dp:~/.kube/config
 {{- end }}
+export HOMEBREW_CASK_OPTS=--no-quarantine
 export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export ZSH="${HOME}/.oh-my-zsh"
