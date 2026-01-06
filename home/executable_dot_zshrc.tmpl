@@ -1,5 +1,6 @@
 # OMZ Configuration
 BREW_LOCATION="{{ if (eq .chezmoi.os "darwin") }}/opt/homebrew/bin/brew{{else}}/home/linuxbrew/.linuxbrew/bin/brew{{end}}"
+HOMEBREW_CASK_OPTS=--no-quarantine
 KREW_ROOT="{{ .chezmoi.homeDir }}/.krew"
 DISABLE_AUTO_UPDATE="true"
 ZSH_DISABLE_COMPFIX=true

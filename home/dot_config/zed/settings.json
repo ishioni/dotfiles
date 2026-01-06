@@ -10,25 +10,30 @@
   "colorize_brackets": true,
   "indent_guides": {
     "coloring": "fixed",
-    "background_coloring": "indent_aware"
+    "background_coloring": "indent_aware",
+  },
+  "edit_predictions": {
+    "mode": "subtle",
   },
   "agent_servers": {
     "cursor-agent": {
-      "type": "custom",
       "command": "cursor-agent-acp",
       "args": [],
-      "env": {}
-    }
+      "env": {},
+    },
+  },
+  "project_panel": {
+    "hide_hidden": false,
   },
   "prettier": {
     "allowed": true,
     "tabWidth": 2,
     "singleQuote": false,
-    "bracketSpacing": false
+    "bracketSpacing": false,
   },
   "disable_ai": false,
   "git_panel": {
-    "fallback_branch_name": "master"
+    "fallback_branch_name": "master",
   },
   "preferred_line_length": 100,
   "tab_size": 2,
@@ -46,7 +51,7 @@
       "**/templates/**/*.tpl",
       "**/templates/**/*.yaml",
       "**/templates/**/*.yml",
-      "**/values*.yaml"
-    ]
-  }
+      "**/values*.yaml",
+    ],
+  },
 }
