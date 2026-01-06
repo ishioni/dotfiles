@@ -17,6 +17,7 @@
   },
   "agent_servers": {
     "cursor-agent": {
+      "type": "custom",
       "command": "cursor-agent-acp",
       "args": [],
       "env": {},
