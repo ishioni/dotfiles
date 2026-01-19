@@ -41,6 +41,8 @@ brew "helmfile"
 brew "opentofu"
 brew "fluxcd/tap/flux"
 
+brew "gemini-cli"
+
 {{ if (eq .chezmoi.os "darwin") }}
 # brew "mas"
 cask "1password"
@@ -62,7 +64,6 @@ cask "telegram"
 cask "textmate"
 cask "visual-studio-code"
 cask "font-fira-code-nerd-font"
-cask "gemini-cli"
 cask "zed"
 
 {{- if .workMachine }}
