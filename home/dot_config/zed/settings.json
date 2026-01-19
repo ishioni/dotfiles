@@ -16,11 +16,8 @@
     "mode": "subtle",
   },
   "agent_servers": {
-    "cursor-agent": {
-      "type": "custom",
-      "command": "cursor-agent-acp",
-      "args": [],
-      "env": {},
+    "gemini": {
+      "ignore_system_version": false,
     },
   },
   "project_panel": {
