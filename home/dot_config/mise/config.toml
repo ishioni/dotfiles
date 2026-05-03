@@ -1,4 +1,6 @@
 [settings]
+env_cache = true
+env_cache_ttl = "6h"
 experimental = true
 disable_hints = ["*"]
 pipx.uvx = true
