@@ -11,4 +11,4 @@ always_keep_install = false                    # deleted on failure by default
 "aqua:astral-sh/uv" = "latest"
 
 [plugins]
-1password-env = "file:/path/to/mise-env-1password"
+1password-env = "https://github.com/kujenga/mise-env-1password"
