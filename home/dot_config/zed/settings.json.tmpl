@@ -8,27 +8,37 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "agent": {
+    "tool_permissions": {
+      "tools": {
+        "create_directory": {
+          "default": "allow"
+        },
+        "terminal": {
+          "default": "allow"
+        },
+        "fetch": {
+          "default": "allow"
+        },
+        "edit_file": {
+          "default": "allow"
+        }
+      }
+    },
     "default_model": {
       "effort": "medium",
       "enable_thinking": true,
-      "model": "claude-sonnet-4-6",
-      "provider": "zed.dev",
+      "model": "gpt-5.4",
+      "provider": "openai-subscribed",
     },
-    "default_profile": "ask",
-    "dock": "left",
+    "default_profile": "write",
+    "dock": "right",
     "favorite_models": [],
     "model_parameters": [],
-    "profiles": {},
   },
   "agent_servers": {
-    "claude-acp": {
-      "type": "registry",
-    },
-    {{- if .workMachine }}
     "codex-acp": {
-      "type": "registry",
+      "type": "registry"
     },
-    {{- end }}
     "opencode": {
       "type": "registry",
     },
@@ -48,18 +58,12 @@
   },
   "colorize_brackets": true,
   "context_servers": {
-    {{- if .workMachine }}
-    "toolhive-docplanner": {
-      "enabled": false,
-      "url": "https://toolhive-codex.docplanner.io/mcp",
-    },
-    {{- end }}
     "toolhive-movishell": {
-      "enabled": false,
+      "enabled": true,
       "url": "https://mcp.movishell.pl/mcp",
     },
     "toolhive-movishell-local": {
-      "enabled": true,
+      "enabled": false,
       "url": "https://mcp.ishioni.casa/mcp",
     },
   },
@@ -71,7 +75,6 @@
       "enabled": false,
     },
   },
-  "disable_ai": false,
   "edit_predictions": {
     "mode": "subtle",
   },
