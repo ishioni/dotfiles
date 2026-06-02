@@ -6,7 +6,7 @@
 # ---------------------------------------------------------------------------------------------------------------------
 export HOMEBREW_CASK_OPTS=--no-quarantine
 echo "Running brew bundle"
-brew bundle --all --file "{{ .paths.config }}/homebrew/Brewfile"
+brew bundle install --file "{{ .paths.config }}/homebrew/Brewfile"
 
 echo "Running brew cleanup"
 brew cleanup --prune=all
