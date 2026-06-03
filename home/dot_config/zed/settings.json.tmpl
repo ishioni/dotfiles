@@ -36,8 +36,13 @@
     "model_parameters": [],
   },
   "agent_servers": {
+    {{- if .workMachine }}
+    "claude-acp": {
+      "type": "registry",
+    },
+    {{- end }}
     "codex-acp": {
-      "type": "registry"
+      "type": "registry",
     },
     "opencode": {
       "type": "registry",
@@ -66,6 +71,12 @@
       "enabled": false,
       "url": "https://mcp.ishioni.casa/mcp",
     },
+    {{- if .workMachine }}
+    "toolhive-docplanner": {
+      "enabled": false,
+      "url": "https://toolhive-codex.docplanner.io/mcp",
+    },
+    {{- end }}
   },
   "current_line_highlight": "all",
   "cursor_shape": "bar",
