@@ -53,7 +53,6 @@ brew "fluxcd/tap/flux"
 
 {{ if (eq .chezmoi.os "darwin") }}
 # brew "mas"
-brew "home-operations/tap/yayamlls"
 cask "1password"
 cask "1password-cli"
 cask "appcleaner"
@@ -74,6 +73,7 @@ cask "suspicious-package"
 cask "telegram"
 cask "textmate"
 cask "font-fira-code-nerd-font"
+cask "home-operations/tap/yayamlls"
 cask "zed"
 
 {{- if .workMachine }}
