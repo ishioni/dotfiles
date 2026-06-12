@@ -11,6 +11,8 @@ export GOPATH="{{ .chezmoi.homeDir }}/.go"
 {{- if .workMachine }}
 export KUBECONFIG=~/.kube/dp:~/.kube/config
 {{- end }}
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
+export HOMEBREW_NO_ASK=1
 export HOMEBREW_CASK_OPTS=--no-quarantine
 export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
