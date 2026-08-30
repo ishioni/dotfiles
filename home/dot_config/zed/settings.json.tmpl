@@ -8,6 +8,9 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "agent": {
+    "sandbox_permissions": {
+      "allow_unsandboxed": true
+    },
     "tool_permissions": {
       "tools": {
         "create_directory": {
@@ -25,9 +28,9 @@
       }
     },
     "default_model": {
-      "effort": "medium",
+      "effort": "high",
       "enable_thinking": true,
-      "model": "gpt-5.4",
+      "model": "gpt-5.6-terra",
       "provider": "openai-subscribed",
     },
     "default_profile": "write",
@@ -42,6 +45,11 @@
     },
     {{- end }}
     "codex-acp": {
+      "default_config_options": {
+        "reasoning_effort": "medium",
+        "mode": "agent-full-access",
+        "model": "gpt-5.6-terra"
+      },
       "type": "registry",
     },
     "opencode": {
