@@ -6,10 +6,6 @@
 # ---------------------------------------------------------------------------------------------------------------------
 set -Eeuo pipefail
 
-if [[ "{{ .chezmoi.os }}" != "linux" ]]; then
-  exit 0
-fi
-
 export PATH="{{ .paths.local }}/bin:${PATH}"
 
 if ! command -v mise >/dev/null 2>&1; then
