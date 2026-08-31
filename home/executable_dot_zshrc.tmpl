@@ -29,6 +29,7 @@ path=("${HOME}/.local/bin" $path)
 
 # Plugins
 plugins=(
+  mise
 {{ if (eq .chezmoi.os "darwin") }}
   brew
 {{ end }}
@@ -43,10 +44,6 @@ plugins=(
   )
 
 # Run!
-if (( $+commands[mise] )); then
-  eval "$(mise activate zsh)"
-fi
-
 source $ZSH/oh-my-zsh.sh
 
 # Initializations
