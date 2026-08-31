@@ -11,7 +11,7 @@ always_keep_install = false                    # deleted on failure by default
 [tools]
 "1password-cli" = "2.35.0"
 age = "latest"
-atuin = "latest"
+atuin = "18.0.0"
 chezmoi = "latest"
 direnv = "latest"
 flux2 = "latest"

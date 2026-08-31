@@ -42,12 +42,12 @@ plugins=(
   zsh-syntax-highlighting
   )
 
-#Run!
-source $ZSH/oh-my-zsh.sh
-
+# Run!
 if (( $+commands[mise] )); then
   eval "$(mise activate zsh)"
 fi
+
+source $ZSH/oh-my-zsh.sh
 
 # Initializations
 path+=($KREW_ROOT/bin)
