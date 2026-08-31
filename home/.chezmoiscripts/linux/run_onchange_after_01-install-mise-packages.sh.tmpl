@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# ---------------------------------------------------------------------------------------------------------------------
+# Install Linux command-line tools with Mise.
+# mise/config.toml hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+# chezmoi configuration hash: {{ include ".chezmoi.yaml.tmpl" | sha256sum }}
+# ---------------------------------------------------------------------------------------------------------------------
+set -Eeuo pipefail
+
+export PATH="{{ .paths.local }}/bin:${PATH}"
+
+if ! command -v mise >/dev/null 2>&1; then
+  echo "Mise is required but was not found at {{ .paths.local }}/bin/mise." >&2
+  exit 1
+fi
+
+echo "Installing Mise tools"
+mise install
+mise reshim

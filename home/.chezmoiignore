@@ -4,6 +4,7 @@ setup.sh
 
 {{ if ne .chezmoi.os "darwin" }}
 .chezmoiscripts/darwin/**
+.chezmoiscripts/run_onchange_after_01-install-homebrew-packages.sh.tmpl
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}

@@ -9,12 +9,7 @@ function initialize_os_env() {
   if [[ "${ostype}" == "Darwin" ]]; then
     initialize_macos
   elif [[ "${ostype}" == "Linux" ]]; then
-    if [[ "$(uname -r)" == *"+truenas"* ]]; then
-      ostype="TrueNAS"
-      initialize_truenas
-    else
-      initialize_linux
-    fi
+    initialize_linux
   else
     echo "Invalid OS type: ${ostype}" >&2
     exit 1
@@ -23,12 +18,12 @@ function initialize_os_env() {
 
 function initialize_macos() {
   function install_xcode() {
-    local git_cmd_path=$(which git)
+    local git_cmd_path
+    git_cmd_path="$(command -v git || true)"
 
-    if [[ ! -e "${git_cmd_path}" ]]; then
-      # Install command line developer tool
+    if [[ -z "${git_cmd_path}" ]]; then
       xcode-select --install
-      read -p "Press any key when the installation has completed." -n 1 -r
+      read -r -p "Press any key when the installation has completed." -n 1
     else
       echo "Command line developer tools are installed."
     fi
@@ -38,82 +33,53 @@ function initialize_macos() {
     sudo softwareupdate --agree-to-license --install-rosetta
   }
 
-  echo "Initializing MacOS..."
+  echo "Initializing macOS..."
   install_xcode
   install_rosetta
 }
 
 function initialize_linux() {
   echo "Initializing Linux..."
-}
 
-function initialize_truenas() {
-  if [[ ! -s /home/linuxbrew ]] ; then
-    echo "Initializing Truenas..."
-    sudo install-dev-tools
-
-    # Determine zpool to use: prefer env var ZFS_POOL, then TRUENAS_ZPOOL, else prompt
-    local zpool_name=""
-    if [[ -n "${ZFS_POOL-}" ]]; then
-      zpool_name="${ZFS_POOL}"
-    elif [[ -n "${TRUENAS_ZPOOL-}" ]]; then
-      zpool_name="${TRUENAS_ZPOOL}"
-    else
-      read -r -p "Enter the ZFS pool to create the linuxbrew dataset on (or leave empty to skip ZFS dataset creation): " zpool_name
-    fi
-
-    # Test if the provided zpool exists
-    if ! sudo zfs list "${zpool_name}" >/dev/null 2>&1; then
-      echo "ZFS pool ${zpool_name} does not exist, exiting..."
-      exit 1
-    fi
-    # If zpool provided, create dataset with mountpoint at /home/linuxbrew
-    if [[ -n "${zpool_name}" ]]; then
-      dataset="${zpool_name}/linuxbrew"
-      echo "Creating ZFS dataset ${dataset}"
-      # Create dataset if it doesn't exist
-      if ! sudo zfs list "${dataset}" >/dev/null 2>&1; then
-        sudo zfs create "${dataset}"
-      else
-        echo "ZFS dataset ${dataset} already exists."
-      fi
-      # Ensure ownership on the dataset
-      sudo chown -R "${USER}:${USER}" "/mnt/${dataset}"
-      sudo chmod 775 "/mnt/${dataset}"
-    fi
-
-    # Ensure user's home has a symlink pointing to the ZFS-managed /home/linuxbrew
-    if [[ ! -s /home/linuxbrew ]] ; then
-      sudo ln -sfn "/mnt/${dataset}" /home/linuxbrew
-    fi
-    # Create tmpdir
-    mkdir -p "/mnt/${dataset}/tmp"
-  else
-    echo "Truenas ready for homebrew"
-  fi
-}
-
-function get_homebrew_install_dir() {
-  if [[ "${ostype}" == "Darwin" ]]; then
-    echo "/opt/homebrew"
-  elif [[ "${ostype}" == "Linux" ]] || [[ "${ostype}" == "TrueNAS" ]]; then
-    echo "/home/linuxbrew/.linuxbrew"
+  if [[ "$(uname -r)" == *"+truenas" ]]; then
+    echo "TrueNAS detected: using a user-local Mise toolchain."
   fi
 }
 
 function install_homebrew() {
-  # Install Homebrew if necessary
   export HOMEBREW_CASK_OPTS=--no-quarantine
-  if [[ -e "$(get_homebrew_install_dir)/bin/brew" ]]; then
+
+  if [[ -x "/opt/homebrew/bin/brew" ]]; then
     echo "Homebrew is already installed."
   else
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
+
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+}
+
+function install_mise() {
+  local mise_bin="${HOME}/.local/bin/mise"
+
+  if [[ -x "${mise_bin}" ]]; then
+    echo "Mise is already installed."
+  else
+    curl https://mise.run | sh
+  fi
+
+  export PATH="${HOME}/.local/bin:${PATH}"
+  eval "$("${mise_bin}" activate bash --shims)"
 }
 
 function install_chezmoi() {
-  # Install chezmoi if necessary
-  if [[ -e "$(get_homebrew_install_dir)/bin/chezmoi" ]]; then
+  if [[ "${ostype}" == "Linux" ]]; then
+    if mise which chezmoi >/dev/null 2>&1; then
+      echo "Chezmoi is already installed."
+    else
+      mise use --global --pin chezmoi@latest
+      mise reshim
+    fi
+  elif command -v chezmoi >/dev/null 2>&1; then
     echo "Chezmoi is already installed."
   else
     brew install chezmoi
@@ -121,58 +87,41 @@ function install_chezmoi() {
 }
 
 function install_1password() {
-  # Install 1Password if necessary
-  if [[ "${ostype}" == "Darwin" ]]; then
-    if [[ -e "$(get_homebrew_install_dir)/bin/op" ]]; then
-      echo "1Password is already installed."
+  if [[ "${ostype}" == "Linux" ]]; then
+    if mise which op >/dev/null 2>&1; then
+      echo "1Password CLI is already installed."
     else
-      brew install --cask 1password
-      brew install --cask 1password-cli
+      mise use --global --pin 1password-cli@2.35.0
+      mise reshim
     fi
-  elif [[ "${ostype}" == "Linux" ]]; then
-    if [[ -e "/usr/local/bin/op" ]]; then
-      echo "1Password is already installed."
-    else
-      wget "https://cache.agilebits.com/dist/1P/op2/pkg/v2.32.0/op_linux_amd64_v2.32.0.zip" -O op.zip && \
-      unzip -d op op.zip && \
-      sudo mv op/op /usr/local/bin/ && \
-      rm -r op.zip op && \
-      sudo groupadd -f onepassword-cli && \
-      sudo chgrp onepassword-cli /usr/local/bin/op && \
-      sudo chmod g+s /usr/local/bin/op
-    fi
-  elif [[ "${ostype}" == "TrueNAS" ]]; then
-    if [[ -e "$(get_homebrew_install_dir)/bin/op" ]]; then
-      echo "1Password is already installed."
-    else
-      wget "https://cache.agilebits.com/dist/1P/op2/pkg/v2.32.0/op_linux_amd64_v2.32.0.zip" -O op.zip && \
-      unzip -d op op.zip && \
-      sudo mv op/op "$(get_homebrew_install_dir)/bin/op" && \
-      sudo chmod g+s "$(get_homebrew_install_dir)/bin/op"
-    fi
-  fi
-  if [[ "${ostype}" == "TrueNAS" ]]; then
+
     op account add --address my.1password.com
     eval "$(op signin)"
+  elif command -v op >/dev/null 2>&1; then
+    echo "1Password CLI is already installed."
+    read -r -p "Please open 1Password, log into all accounts, and enable Integrate with 1Password CLI. Press any key to continue." -n 1
   else
-    read -p "Please open 1Password, log into all accounts and set under Settings>CLI activate Integrate with 1Password CLI. Press any key to continue." -n 1 -r
+    brew install --cask 1password
+    brew install --cask 1password-cli
+    read -r -p "Please open 1Password, log into all accounts, and enable Integrate with 1Password CLI. Press any key to continue." -n 1
   fi
-}
-
-function get_homebrew_shellenv() {
-  "$(get_homebrew_install_dir)/bin/brew" shellenv
 }
 
 initialize_os_env
-install_homebrew
-eval "$(get_homebrew_shellenv)"
+
+if [[ "${ostype}" == "Darwin" ]]; then
+  install_homebrew
+else
+  install_mise
+fi
+
 install_chezmoi
 install_1password
 
 # Apply dotfiles
 echo "Applying Chezmoi configuration."
 chezmoi init "${DOTFILES_REPO_URL}"
-cd ~/.local/share/chezmoi
+cd "${HOME}/.local/share/chezmoi"
 git remote set-url origin git@github.com:ishioni/dotfiles.git
 chezmoi apply
-source "${HOME}"/.zshrc
+source "${HOME}/.zshrc"
